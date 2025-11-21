@@ -53,7 +53,6 @@ nav a {
     border: none;
     color: blue;
     cursor: pointer
-    
 }
 
 .heroclass{
@@ -64,8 +63,8 @@ nav a {
 .class1 {
     display: flex;
     justify-content: space-between;
-    align-items: center
-    
+    align-items: center;
+    margin-left: 100px;
 }
 
 .dummy h1 {
@@ -90,6 +89,10 @@ nav a {
 
 .img1 {
     width: 400px
+}
+
+.photo{
+    margin-right: 100px;
 }
 
 .akku {
@@ -121,22 +124,36 @@ nav a {
     max-width: 1250px;
     margin: auto;
     display: flex;
-    gap: 50px;
+    gap: 30px;
     align-items: flex-start
 }
 
-.book3 {
+
+.services-left {
     flex: 1;
     background: #fff;
     padding: 25px;
     border-radius: 18px;
-    
+}
+
+
+.cart-right {
+    flex: 1;
+    background: #fff;
+    padding: 25px;
+    border-radius: 18px;
 }
 
 .services h2 {
     font-size: 24px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-weight: 600
+}
+
+.class19 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
 }
 
 .item {
@@ -163,14 +180,13 @@ nav a {
     cursor: pointer
 }
 
-
 table {
     width: 100%;
     border-collapse: collapse;
     background: #fff;
     border-radius: 15px;
     overflow: hidden;
-   
+    margin: 20px 0;
 }
 
 table th {
@@ -199,7 +215,7 @@ table td {
     padding: 12px 15px;
     margin: 10px 0;
     border-radius: 10px;
-    border: 1px solid #fff;
+    border: 1px solid #ddd;
     font-size: 15px
 }
 
@@ -234,11 +250,6 @@ table td {
 .servicess-card {
     text-align: center;
     width: 22%
-}
-
-.servicess-card img {
-    width: 60px;
-    margin-bottom: 15px
 }
 
 .servicess-card h3 {
@@ -335,15 +346,6 @@ table td {
 
 .logo1 {
     font-size: 50px;
-}
-
-
-.class1{
-    margin-left: 100px;
-}
-
-.photo{
-    margin-right: 100px;
 }
 
 html {
