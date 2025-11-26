@@ -1,42 +1,48 @@
 let cart = [];
+
+const buttons = document.querySelectorAll(".add-btn");
 const cartList = document.getElementById("cart-list");
 const totalAmount = document.getElementById("total-amount");
 
 
-document.querySelectorAll(".add-btn").forEach(btn => {
+
+buttons.forEach(btn => {
     btn.addEventListener("click", () => {
+
         const name = btn.getAttribute("data-name");
         const price = Number(btn.getAttribute("data-price"));
 
-       
-        const existing = cart.findIndex(item => item.name === name);
+        
+        const item = cart.find(item => item.name === name);
 
-        if (existing === -1) {
+        if (!item) {
             
             cart.push({ name, price });
             btn.textContent = "Remove";
             btn.classList.add("remove-btn");
         } else {
             
-            cart.splice(existing, 1);
+            cart = cart.filter(item => item.name !== name);
             btn.textContent = "Add";
             btn.classList.remove("remove-btn");
+
         }
 
         renderCart();
     });
 });
 
+
+
 function renderCart() {
     cartList.innerHTML = "";
     let total = 0;
 
-    cart.forEach((item, i) => {
+    cart.forEach((item, index) => {
         total += item.price;
-
         cartList.innerHTML += `
             <tr>
-                <td>${i + 1}</td>
+                <td>${index + 1}</td>
                 <td>${item.name}</td>
                 <td>₹${item.price}</td>
             </tr>
@@ -45,6 +51,10 @@ function renderCart() {
 
     totalAmount.textContent = total;
 }
+
+
+
+
 
 document.getElementById("book-btn").addEventListener("click", () => {
     const userName = document.getElementById("full-name").value.trim();
@@ -60,12 +70,18 @@ document.getElementById("book-btn").addEventListener("click", () => {
         return;
     }
 
-    emailjs.send("service_wxbcq5q", "template_p8aaivh", {
-        orders: cart.map(item => ({
-            name: item.name,
-            price: item.price,
+    
+    let orderList = [];
+    for (let i = 0; i < cart.length; i++) {
+        orderList.push({
+            name: cart[i].name,
+            price: cart[i].price,
             units: 1
-        })),
+        });
+    }
+
+    emailjs.send("service_wxbcq5q", "template_p8aaivh", {
+        orders: orderList,
         cost: {
             shipping: 0,
             tax: 0,
@@ -76,14 +92,15 @@ document.getElementById("book-btn").addEventListener("click", () => {
     })
     .then(() => {
         alert("Order placed successfully! Email sent.");
+        
         cart = [];
         renderCart();
 
-        // reset buttons to "Add"
-        document.querySelectorAll(".add-btn").forEach(btn => {
-            btn.textContent = "Add";
-            btn.classList.remove("remove-btn");
-        });
+        
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].textContent = "Add";
+            buttons[i].classList.remove("remove-btn");
+        }
     })
     .catch(err => {
         console.error("EmailJS Error:", err);
