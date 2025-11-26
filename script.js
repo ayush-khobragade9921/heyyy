@@ -14,7 +14,8 @@ buttons.forEach(btn => {
 
         
         const item = cart.find(item => item.name === name);
-
+    console.log(item);
+    
         if (!item) {
             
             cart.push({ name, price });
